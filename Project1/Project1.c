@@ -1,14 +1,18 @@
 #include<stdio.h>
 
 int encyption(int x);
+int decryption(int y);
 
 
 int main() {
-  printf("hello world");
+	printf("hello world");
 }
 
 int encryption(int x) {
-    return (message + key)(% 26);
+	return (message + key)(% 26);
+}
+int decryption(int y) {
+	return (cipher - key)(% 26);
 }
 
 
