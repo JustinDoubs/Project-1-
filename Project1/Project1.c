@@ -9,26 +9,38 @@
  * 
  */
 
-
-
-
 #include<stdio.h>
 
-//int rotationEncyption(int x);
-//int rotationDecryption(int c);
-
-
 int main() {
+    char inputText[100];
+   
     
-    //char alphabetValues[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    char message[] = "message";
     int i = 0;
     char x;
+    int key;
+    
+    printf("enter text to be encrypted:\n");
+    scanf("%s", inputText);
+    
+    printf("enter key:\n");
+    scanf("%d", &key);
+    
 
-    for (i = 0; message[i] != '\0'; ++i) {
-      x = message[i];
-      sprintf("%s", message[i]);
+    for (i = 0; inputText[i] != '\0'; ++i) {
+      x = inputText[i];
+      
+      if(x >= 'a' && x <= 'z') {
+          x = x + key;
+          
+          if(x > 'z')
+            x = x - 'z' + 'a' - 1;
+      }
+     inputText[i] = x;  
+    
     }
+    printf("Encrypted message: %s\n", inputText);
+    
+    return 0;
 }
 
 /**
