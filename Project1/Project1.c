@@ -21,12 +21,13 @@
 int main() {
     
     //char alphabetValues[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    char message[] = "message"
+    char message[] = "message";
     int i = 0;
+    char x;
 
-    for (i = 0; i < 100; i++) {
-      message[i] = i;
-      printf("%c", message[i]);
+    for (i = 0; message[i] != '\0'; ++i) {
+      x = message[i];
+      sprintf("%s", message[i]);
     }
 }
 
