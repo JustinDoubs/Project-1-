@@ -1,17 +1,32 @@
+/**
+ * need message 
+ * message is in ascii
+ * change to 0 and 26 
+ * 
+ * 
+ * decrypt it 
+ * 
+ * 
+ */
+
+
+
+
 #include<stdio.h>
 
-int rotationEncyption(int x);
-int rotationDecryption(int c);
+//int rotationEncyption(int x);
+//int rotationDecryption(int c);
 
 
 int main() {
     
-    char alphabetValues[26] = {'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    //char alphabetValues[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    char message[] = "message"
     int i = 0;
 
-    for (i = 0; i < 26; i++) {
-      alphabetValues[26] = i;
-      printf("%c", alphabetValues[26]);
+    for (i = 0; i < 100; i++) {
+      message[i] = i;
+      printf("%c", message[i]);
     }
 }
 
@@ -43,6 +58,9 @@ int decryption(int c) {
  *  to do- 
  * -----------------------------------------
  * create a key which assigns all letters to numbers from 0 to 25
+ * 
+ * take string of words 
+ * do math on each letter and rewrite message in decrypted form 
  * 
  * 
  * 
