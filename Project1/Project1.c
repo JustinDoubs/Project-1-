@@ -1,11 +1,24 @@
 #include<stdio.h>
 
-int encyption(int x);
-int decryption(int c);
+int rotationEncyption(int x);
+int rotationDecryption(int c);
 
 
 int main() {
-	Switch(a) : 
+    
+    char alphabetValues[26] = {'a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    int i = 0;
+
+    for (i = 0; i < 26; i++) {
+      alphabetValues[26] = i;
+      printf("%c", alphabetValues[26]);
+    }
+}
+
+/**
+    
+    
+	switch(a) : 
 		case 'a' : 
 			//lets make this encryption option
 			//call encryption function encyption(x)
@@ -22,7 +35,7 @@ int encryption(int x) {
 int decryption(int c) {
 	return (cipher - key)(% 26);
 }
-
+*/
 
 
 
@@ -45,5 +58,5 @@ int decryption(int c) {
 
 
 
-subsititution cipher is array stuff stuff stuff. 
+//gcc Project1.csubsititution cipher is array stuff stuff stuff. 
 
