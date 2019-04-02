@@ -13,18 +13,14 @@
 
 int main() {
     char inputText[100];
-   
-    
     int i = 0;
     char x;
-    int key;
-    
+    int key; 
     printf("enter text to be encrypted:\n");
     scanf("%s", inputText);
     
     printf("enter key:\n");
     scanf("%d", &key);
-    
 
     for (i = 0; inputText[i] != '\0'; ++i) {
       x = inputText[i];
@@ -34,6 +30,12 @@ int main() {
           
           if(x > 'z')
             x = x - 'z' + 'a' - 1;
+            
+      }else if(x >= 'A' && x <= 'Z') {
+          x = x + key;
+          
+          if (x > 'Z')
+            x = x -'Z' + 'A' - 1;
       }
      inputText[i] = x;  
     
