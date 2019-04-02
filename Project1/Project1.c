@@ -1,19 +1,28 @@
 #include<stdio.h>
 
 int encyption(int x);
-int decryption(int y);
+int decryption(int c);
 
 
 int main() {
-	printf("hello world");
+	Switch(a) : 
+		case 'a' : 
+			//lets make this encryption option
+			//call encryption function encyption(x)
+			return;
+		case 'b' : 
+			//this can be decryption
+			//call decryption function decryption(c)
+			return;
 }
 
 int encryption(int x) {
 	return (message + key)(% 26);
 }
-int decryption(int y) {
+int decryption(int c) {
 	return (cipher - key)(% 26);
 }
+
 
 
 
