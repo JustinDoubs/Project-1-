@@ -2,34 +2,46 @@
 
 int main() {
     
-    int choice;
-    printf("Please enter 1 for 'Encryption of a message with a rotation cipher given the message text and rotation amount'\n"
-    "2 for 'Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount'\n"
-    "3 for 'Encryption of a message with a substitution cipher given message text and alphabet substitution'\n"
-    "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
-    "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
-    "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
     
-    switch (choice) {
-        case '1':
-            // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
-            break;
-        case '2':
-            // 2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount
-            break;
-        case '3':
-            // 3. Encryption of a message with a substitution cipher given message text and alphabet substitution
-            break;
-        case '4':
-            // 4. Decryption of a message encrypted with a substitution cipher given cipher text and substitutions
-            break;
-        case '5':
-            // 5. Decryption of a message encrypted with a rotation cipher given cipher text only
-            break;
-        case '6':
-            // 6. Decryption of a message encrypted with a substitution cipher given cipher text only
-            break;
+    
+    
+    int choice;
+    
+    //while (switchValid = 0) {
+    
+        printf("Please enter 1 for 'Encryption of a message with a rotation cipher given the message text and rotation amount'\n"
+        "2 for 'Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount'\n"
+        "3 for 'Encryption of a message with a substitution cipher given message text and alphabet substitution'\n"
+        "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
+        "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
+        "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
+    
+        switch (choice) {
+            case '1':
+                
+                // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
+                break;
+            case '2':
+                // 2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount
+                break;
+            case '3':
+                // 3. Encryption of a message with a substitution cipher given message text and alphabet substitution
+                break;
+            case '4':
+                // 4. Decryption of a message encrypted with a substitution cipher given cipher text and substitutions
+                break;
+            case '5':
+                // 5. Decryption of a message encrypted with a rotation cipher given cipher text only
+                break;
+            case '6':
+                    // 6. Decryption of a message encrypted with a substitution cipher given cipher text only
+                    break;
+                default :
+                    printf("Something went wrong here, Please enter valid option.");
+        }
+    
     }
+
 
     
     
@@ -40,6 +52,7 @@ int main() {
     
     
 // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
+//rotationEncryption(inputText, key) {    
     char inputText[100];//  array with ample range for any text input
     int i = 0; // counter integer
     char x; //temp store of individual characters
@@ -117,6 +130,27 @@ int decryption(int c) {
  *  to do- 
  * -----------------------------------------
  * create a key which assigns all letters to numbers from 0 to 25
+ * 
+ * take string of words 
+ * do math on each letter and rewrite message in decrypted form 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+
+
+
+
+
+
+//gcc Project1.csubsititution cipher is array stuff stuff stuff. 
+
+hich assigns all letters to numbers from 0 to 25
  * 
  * take string of words 
  * do math on each letter and rewrite message in decrypted form 
