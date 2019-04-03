@@ -1,6 +1,44 @@
 #include<stdio.h>
 
 int main() {
+    
+    int choice;
+    printf("Please enter 1 for 'Encryption of a message with a rotation cipher given the message text and rotation amount'\n"
+    "2 for 'Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount'\n"
+    "3 for 'Encryption of a message with a substitution cipher given message text and alphabet substitution'\n"
+    "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
+    "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
+    "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
+    
+    switch (choice) {
+        case '1':
+            // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
+            break;
+        case '2':
+            // 2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount
+            break;
+        case '3':
+            // 3. Encryption of a message with a substitution cipher given message text and alphabet substitution
+            break;
+        case '4':
+            // 4. Decryption of a message encrypted with a substitution cipher given cipher text and substitutions
+            break;
+        case '5':
+            // 5. Decryption of a message encrypted with a rotation cipher given cipher text only
+            break;
+        case '6':
+            // 6. Decryption of a message encrypted with a substitution cipher given cipher text only
+            break;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
 // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
     char inputText[100];//  array with ample range for any text input
     int i = 0; // counter integer
