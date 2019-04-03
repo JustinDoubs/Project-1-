@@ -1,10 +1,7 @@
 #include<stdio.h>
 
 int main() {
-    
-    
-    
-    
+
     int choice;
     
     //while (switchValid = 0) {
@@ -15,13 +12,15 @@ int main() {
         "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
         "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
         "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
+    char inputText[100]; //  array with ample range for any text input
+    int key;        
+        
         
         scanf("%d",&choice);
     
         switch (choice) {
             case '1':
-                char inputText[100]; //  array with ample range for any text input
-                int key; // key* determines how far the message is translated 
+                 // key* determines how far the message is translated 
                 printf("enter text to be encrypted:\n"); // takes user input for text to be encrypted
                 fgets(inputText, 100, stdin); // stores user user input in array 'inputText'  have used fgets in lieu of anything bettter as i dont know how to stroe white space in an array... 
                 
@@ -33,9 +32,7 @@ int main() {
                 
                 // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
                 break;
-            case '2':
-                char inputText[100]; //  array with ample range for any text input
-                int key; // key* determines how far the message is translated 
+            case '2': 
                 printf("enter text to be encrypted:\n"); // takes user input for text to be encrypted
                 fgets(inputText, 100, stdin); // stores user user input in array 'inputText'  have used fgets in lieu of anything bettter as i dont know how to stroe white space in an array... 
                 
