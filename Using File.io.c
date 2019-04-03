@@ -1,11 +1,11 @@
-#include <stdio.h>
+/**#include <stdio.h>
 
 int main(void)
 {
     printf("hello, world\n");
 }
 
-/** files are accessed using streams. stout and stin are streams.
+ files are accessed using streams. stout and stin are streams.
 variable type is a 'FILE *' 
 
 
