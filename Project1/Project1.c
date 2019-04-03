@@ -18,6 +18,16 @@ int main() {
     
         switch (choice) {
             case '1':
+                char inputText[100]; //  array with ample range for any text input
+                int key; // key* determines how far the message is translated 
+                printf("enter text to be encrypted:\n"); // takes user input for text to be encrypted
+                fgets(inputText, 100, stdin); // stores user user input in array 'inputText'  have used fgets in lieu of anything bettter as i dont know how to stroe white space in an array... 
+                
+    
+                printf("enter key:\n"); //prints 'enter key:' then starts new line 
+                scanf("%d", &key); // stores user input in integer 'key'
+    
+                rotationEncryption(inputText, key);
                 
                 // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
                 break;
@@ -43,9 +53,7 @@ int main() {
     }
 
 
-    
-    
-    
+/*_________________________________________________________________________________________________________________________________________________________   
     
     
     
@@ -97,8 +105,8 @@ int main() {
 
 
 
-
-
+_____________________________________________________________________________________________________________
+*/
 
 /**
     
@@ -137,20 +145,7 @@ int decryption(int c) {
  * 
  * 
  * 
- * 
- * 
- */
-
-
-
-
-
-
-
-
-//gcc Project1.csubsititution cipher is array stuff stuff stuff. 
-
-hich assigns all letters to numbers from 0 to 25
+ * hich assigns all letters to numbers from 0 to 25
  * 
  * take string of words 
  * do math on each letter and rewrite message in decrypted form 
