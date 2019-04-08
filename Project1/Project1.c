@@ -15,7 +15,7 @@ int main() {
         "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
         "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
         char inputText[100] = {"Hello world."};
-        char cipherText[100] = {"Ifmmp xpsme."};
+        char cipherText[100] = {"ifmmp xpsme."};
         int key = 1;        
         
         
@@ -114,12 +114,13 @@ void rotationDecryption(char *cipherText, int key) {
           x1 = cipherText[i]; //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
 
           if(x1 >= 'a' && x1 <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
-              x1 = x1 - key; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
+              x1 = x1 - 32; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
 
-              if(x1 > 'z') //if the ascii value of 'x' is greater than the ascii value of 'z' then next line will run 
-                x1 = x1 - 'z' + 'a' - 1; //ascii value of x - 26 |||||||||||| should change this to mod 26 when i have re assigned alphabet chars to 0 to 26|||||||||||||
+              //if(x1 > 'z') //if the ascii value of 'x' is greater than the ascii value of 'z' then next line will run 
+                //x1 = x1 - 'z' + 'a' - 1; //ascii value of x - 26 |||||||||||| should change this to mod 26 when i have re assigned alphabet chars to 0 to 26|||||||||||||
 
-          }else if(x1 >= 'A' && x1 <= 'Z') { 
+          }
+          else if(x1 >= 'A' && x1 <= 'Z') { 
               x1 = x1 - key;
 
               if (x1 > 'Z')
