@@ -14,8 +14,8 @@ int main() {
         "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
         "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
         "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n");
-        char inputText[100] = {"Hello world."};
-        char cipherText[100] = {"ifmmp xpsme."};
+        char inputText[1000];
+        char cipherText[1000];
         int key = 1;        
         
         
@@ -28,9 +28,14 @@ int main() {
                 //fgets(inputText, 100, stdin); // stores user user input in array 'inputText'  have used fgets in lieu of anything bettter as i dont know how to stroe white space in an array... 
                 
     
-                //printf("enter key:\n"); //prints 'enter key:' then starts new line 
-               // scanf("%d", &key); // stores user input in integer 'key'
-    
+              
+                printf("Enter text to be encrypted: NOTE to end entry press Tab\n");
+                scanf("%[^\t]s", inputText);
+                //fgets(inputText, 100, stdin); 
+                
+                printf("enter key:\n"); //prints 'enter key:' then starts new line 
+                scanf(" %d", &key);
+                
                 rotationEncryption(inputText, key);
                 
                 // 1. Encryption of a message with a rotation cipher given the message text and rotation amount
@@ -42,7 +47,12 @@ int main() {
     
                 //printf("enter key:\n"); //prints 'enter key:' then starts new line 
                 //scanf("%d", &key); // stores user input in integer 'key'
-    
+                printf("Enter text to be encrypted: NOTE to end entry enter 'NULL'\n");
+                scanf(" %[^\t]s", cipherText);
+                
+                printf("enter key:\n"); //prints 'enter key:' then starts new line 
+                scanf(" %d", &key);
+                
                 rotationDecryption(cipherText, key);
                 // 2. Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount
                 break;
@@ -96,7 +106,7 @@ void rotationEncryption(char *inputText, int key) {
 
      }
 
-    printf("Encrypted message: %s\n", inputText); //prints "Encrypted message: ************" then creates new line.
+    printf("Encrypted message:\n %s\n", inputText); //prints "Encrypted message: ************" then creates new line.
 }
 
 
