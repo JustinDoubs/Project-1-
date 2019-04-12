@@ -2,6 +2,7 @@
 #include<unistd.h>
 void rotationDecryption(char *inputText, int key);
 void rotationEncryption(char *inputText, int key);
+void SubstitiutionEncryption(char *inputText, char *subKey);
 int main() {
 
     int choice = 0;
@@ -19,6 +20,7 @@ int main() {
         
         char inputText[1000];
         char cipherText[1000];
+        char subKey[26];
         int key = 1;        
         char b = 1;
         
@@ -55,7 +57,7 @@ int main() {
           // printf("enter key:\n"); //prints 'enter key:' then starts new line
           // scanf("%d", &key); // stores user input in integer 'key'
           printf(
-              "Enter text to be encrypted: NOTE to end entry press Tab\n");
+              "Enter text to be decrypted: NOTE to end entry press Tab\n");
           scanf(" %[^\t]s", cipherText);
 
           printf("enter key:\n"); // prints 'enter key:' then starts new line
@@ -133,8 +135,8 @@ void rotationDecryption(char *cipherText, int key) {
 
     
     
-        for (i = 0; cipherText[i] != '\0'; ++i) { //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
-            x1 = cipherText[i]; //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
+        for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                       //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
+            x1 = cipherText[i];                                                         //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
 
             if(x1 >= 'a' && x1 <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
                 x1 = x1 - 32; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
@@ -155,6 +157,10 @@ void rotationDecryption(char *cipherText, int key) {
 
     printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
 }
+
+//void SubstitiutionEncryption(char *inputText, char *subKey) {
+    
+    //for ( int i = 0; )
 
 /*_________________________________________________________________________________________________________________________________________________________   
     
