@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<unistd.h>
 void rotationDecryption(char *inputText, int key);
-void rotationEncryption(char *inputText, int key);
+void rotationEncryption(char *cipherText, int key);
+void rotationBruteForceAttack(char *cipherText);
 void SubstitiutionEncryption(char *inputText, char *subKey);
 int main() {
 
@@ -21,7 +22,7 @@ int main() {
         char inputText[1000];
         char cipherText[1000];
         char subKey[26];
-        int key = 1;        
+        int key = 1;
         char b = 1;
         
         scanf("%d",&choice);
@@ -69,10 +70,26 @@ int main() {
           // cipher text and rotation amount
           break;
         case '3':
-          // 3. Encryption of a message with a substitution cipher given message
-          // text and alphabet substitution
-          break;
+            /*
+             * printf(
+                "Enter text to be decrypted: NOTE to end entry press Tab\n");
+            scanf(" %[^\t]s", cipherText);
+
+            printf("enter key:\n"); // prints 'enter key:' then starts new line
+            scanf(" %d", &key); 
+            */
+
+            rotationBruteForceAttack(cipherText);
+            sleep(5);
+        
+            // 3. Encryption of a message with a substitution cipher given message
+            // text and alphabet substitution
+            break;
         case '4':
+        
+        /*
+         * substitution cipher encryption. 
+         */
           // 4. Decryption of a message encrypted with a substitution cipher
           // given cipher text and substitutions
           break;
@@ -156,6 +173,38 @@ void rotationDecryption(char *cipherText, int key) {
         }
 
     printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
+}
+
+void rotationBruteForceAttack(char *cipherText) {
+    
+    char x1; //temp store of individual characters
+    int i = 0; // counter integer
+    int key = 0;
+    
+    for (key = 0; key < 27; ++key) {
+        for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                       //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
+            x1 = cipherText[i];                                                         //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
+
+            if(x1 >= 'a' && x1 <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
+                x1 = x1 - 32; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
+
+                //if(x1 > 'z') //if the ascii value of 'x' is greater than the ascii value of 'z' then next line will run 
+                //x1 = x1 - 'z' + 'a' - 1; //ascii value of x - 26 |||||||||||| should change this to mod 26 when i have re assigned alphabet chars to 0 to 26|||||||||||||
+            }
+            if(x1 >= 'A' && x1 <= 'Z') { 
+                x1 = x1 - key;
+
+                if (x1 > 'Z')
+                    x1 = x1 -'Z' + 'A' - 1;
+            }
+            
+            cipherText[i] = x1; //recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
+        
+        }
+
+        printf("Decrypted message: %s\n", cipherText);
+    }
+
 }
 
 //void SubstitiutionEncryption(char *inputText, char *subKey) {
