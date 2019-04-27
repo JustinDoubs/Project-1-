@@ -13,107 +13,99 @@ int sizeOfArray(char *cipherText);
 
 int main() {
 
-    int choice = 1;
+    int choice = 1; //choice is set to 1 so that while statement is valid
     
-    while (choice < 7 && choice > 0) {
+    while (choice < 7 && choice > 0) { // while statement will run until a number greater than 7 and less that 0 is entered.
     
         printf("Please enter:\n"
-        "1 for 'Encryption of a message with a rotation cipher given the message text and rotation amount'\n"
-        "2 for 'Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount'\n"
-        "3 for 'Encryption of a message with a substitution cipher given message text and alphabet substitution'\n"
-        "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
-        "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
-        "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n"
-        "press any other number to exit program\n");
+                "1 for 'Encryption of a message with a rotation cipher given the message text and rotation amount'\n"
+                "2 for 'Decryption of a message encrypted with a rotation cipher given cipher text and rotation amount'\n"
+                "3 for 'Encryption of a message with a substitution cipher given message text and alphabet substitution'\n"
+                "4 for 'Decryption of a message encrypted with a substitution cipher given cipher text and substitutions'\n"
+                "5 for 'Decryption of a message encrypted with a rotation cipher given cipher text only'\n"
+                "6 for 'Decryption of a message encrypted with a substitution cipher given cipher text only'\n"
+                "press any other number to exit program\n");
         
-        char inputText[1000];
-        char cipherText[1000];
         
-        char subKey[26];
-        int key = 1;
-        char b = 1;
-        int k = sizeOfArray(cipherText) - 1;
-        char arrayCopy[k];
+        char cipherText[1000];                  // creating string to store the users text in to be encrypted or decrypted        
+        char subKey[26];                        // string to store users input of the Key for subsititution encryption and decryption.
+        int key = 1;                            // initialization of the key used in rotation encryption and decryption.
+        int k = sizeOfArray(cipherText);        // initialises k as the value of the size of the string cipher text ( inputed by the user)       // maybe should have + 1
+        char arrayCopy[k];                      // string used for storing a duplicate of the cipherText string for manipulations in the rotation brute force attack which has the size of cipher text.
 
         
-        scanf("%d",&choice);
+        scanf("%d",&choice);                    // takes input from user, overwriting the value of choice and therefore selecting the option from the menu.
 
-        switch (choice) {
-        case 1:
-        
-          // key* determines how far the message is translated
-          // printf("enter text to be encrypted:\n"); // takes user input for
-          // text to be encrypted fgets(inputText, 100, stdin); // stores user
-          // user input in array 'inputText'  have used fgets in lieu of
-          // anything bettter as i dont know how to stroe white space in an
-          // array...
-
-          printf("Enter text to be encrypted: NOTE to end entry press Tab followed by Enter\n");
-          scanf("%[^\t]s", inputText);
-          // fgets(inputText, 100, stdin);
-
-          printf("enter key:\n"); // prints 'enter key:' then starts new line
-          scanf(" %d", &key);
-
-          rotationEncryption(inputText, key);
-
-            break;
-        case 2:
-          // printf("enter text to be encrypted:\n"); // takes user input for
-          // text to be encrypted fgets(inputText, 100, stdin); // stores user
-          // user input in array 'inputText'  have used fgets in lieu of
-          // anything bettter as i dont know how to stroe white space in an
-          // array...
-
-          // printf("enter key:\n"); //prints 'enter key:' then starts new line
-          // scanf("%d", &key); // stores user input in integer 'key'
-          printf(
-              "Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");
-          scanf(" %[^\t]s", cipherText);
-
-          printf("enter key:\n"); // prints 'enter key:' then starts new line
-          scanf(" %d", &key);
-
-          rotationDecryption(cipherText, key);
-
-          // 2. Decryption of a message encrypted with a rotation cipher given
-          // cipher text and rotation amount
-          break;
-        case 3 :
-            printf("Enter text to be encrypted: NOTE to end entry press Tab, followed by enter\n");
-            scanf(" %[^\t]s", cipherText);
-
-            printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
-            scanf(" %[^\t]s", subKey);
+        switch (choice) {                       // switch case statement for each of the menu options selected by scanf function above. 
             
-            SubstitiutionEncryption(cipherText, subKey);
+            // case 1 is encryption of text using rotation cipher, text and key are inputed by user.
             
+            case 1:                                                                                                                       
 
-            // 3. Encryption of a message with a substitution cipher given message
-            // text and alphabet substitution
+                printf("Enter text to be encrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
+                scanf("%[^\t]s", cipherText);                                                                         // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
+                
+                printf("enter key:\n");                                                                               // prints 'enter key:' then starts new line               
+                scanf(" %d", &key);                                                                                   // reads integer from user and stores it in the key variable.
+                
+                rotationEncryption(cipherText, key);                                                                  // calls rotationEncrytion() function, which takes cipher text wich is a string and key which is an integer between 0 and 26.
+                                                                                                                      // definition of function below.
+                break;                                                                                                // exits the switch case, printing the menu and asking for choice again.
+
+            // case 2 is decryption of text using rotation cipher, encryptedtext and key are inputed by user.
+
+            case 2:
+             
+                printf("Enter text to be encrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
+                scanf("%[^\t]s", cipherText);                                                                         // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
+                                
+                printf("enter key:\n");                                                                               // prints 'enter key:' then starts new line               
+                scanf(" %d", &key);                                                                                   // reads integer from user and stores it in the key variable.
+                    
+                rotationDecryption(cipherText, key);                                                                  // calls rotationDecryption function which takes cipher text which is a string and key which is an integer
+
+                break;
+ 
+            // Case 3 is encryption of text using substitution cipher, text and key are inputed by user.
+ 
+            case 3 :
+                printf("Enter text to be encrypted: NOTE to end entry press Tab, followed by enter\n");               // prints message asking for text input to be encrypted and specifies how it should be done.
+                scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
+    
+                printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
+                scanf(" %[^\t]s", subKey);                                                                            // reads string of a new alphabet and stores it in subKey input needs to be 26 characters and with no repetition
+                
+                SubstitiutionEncryption(cipherText, subKey);                                                          // call SubstitutionEncryption function which takes cipherText and subKey (both strings)
+                
+                break;
+                
+            // case 4 is decryption of text using substitution cipher, encrypted text and key are given 
+                
+            case 4 :
             
-            break;
-        case 4 :
-        
-        
-          break;
-        case 5 :
-        printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");
-            scanf(" %[^\t]s", cipherText);
-           
-            for (int key = 1; key < 27; key++) {
-                arraycopy(cipherText, arrayCopy);
-                newrotationBruteForceAttack(arrayCopy, key);
-            }
-          // 5. Decryption of a message encrypted with a rotation cipher given
-          // cipher text only
-          break;
-        case 6 :
-          // 6. Decryption of a message encrypted with a substitution cipher
-          // given cipher text only
-          break;
-        default :
-          printf("Thankyou for using my program!\n");
+                break;
+                
+            // case 5 is brute force decryption of rotation cipher given encrypted text. 
+                
+            case 5 :
+                printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");                // asks for encrypted text to be entered for decryption and how it is to be done
+                scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
+               
+                for (int key = 1; key < 27; key++) {                                                                  // for 26 iterations i is incremented 
+                    arraycopy(cipherText, arrayCopy);                                                                 // calls arraycopy with cipher text and arrayCopy (function copies cipher text to arrayCopy)
+                    newrotationBruteForceAttack(arrayCopy, key);
+                }
+             
+              break;
+            case 6 :
+              // 6. Decryption of a message encrypted with a substitution cipher
+              // given cipher text only
+              break;
+              
+            // if 1,2,3,4,5 or 6 are not selected then defult is selected.
+            
+            default : 
+              printf("Thankyou for using my program!\n");                                                             // prints 'Thankyou for using my program!' new line 
         }
     }
 }
@@ -257,9 +249,10 @@ void newrotationBruteForceAttack(char *cipherText, int key) {
             cipherText[i] = x1;
             }
         }
-        //if ((cipherText[i] == 'T' && cipherText[i + 1] == 'H' && cipherText[i + 2] == 'E') || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') || (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')){
+        if ((cipherText[i] == 84 && cipherText[i + 1] == 72 && cipherText[i + 2] == 69)){
             printf("Decrypted message: %s\n", cipherText);
-        //}
+        }
+        // || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') || (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')
 }
 
 void SubstitiutionEncryption(char *cipherText, char *subKey) {
