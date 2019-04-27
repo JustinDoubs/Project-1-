@@ -93,7 +93,7 @@ int main() {
                
                 for (int key = 1; key < 27; key++) {                                                                  // for 26 iterations i is incremented 
                     arraycopy(cipherText, arrayCopy);                                                                 // calls arraycopy with cipher text and arrayCopy (function copies cipher text to arrayCopy)
-                    newrotationBruteForceAttack(arrayCopy, key);
+                    newrotationBruteForceAttack(arrayCopy, key);                                                      // calls newrotationBruteForceAttack function whic takes arrayCopy and key 
                 }
              
               break;
@@ -110,72 +110,74 @@ int main() {
     }
 }
 
-//Encryption function takes a string and an integer key and for every character in the string if it is between a and z ascii values the value of that char is minused by 32 to give the capital of that letter then the key is added to the char if it is within the ascii value of A and Z. the characters are reassembled into a string and the string is printed.
+// rotationEncryption function takes a string and an integer key and for every character in the string if it is between a and z ascii values the value of that char is minused by 32 
+// to give the capital of that letter then the key is added to the char if it is within the ascii value of A and Z. the characters are reassembled into a string and the string 
+// is printed.
 
-void rotationEncryption(char *inputText, int key) {
+void rotationEncryption(char *inputText, int key) {             // function does not return any value
     
-    char x; //temp store of individual characters
-    int i = 0; // counter integer
+    char x;                                                     // temporary store of individual characters
+    int i = 0;                                                  // counter integer
 
     
             
-        for (i = 0; inputText[i] != '\0'; ++i) { //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
-          x = inputText[i]; //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
+        for (i = 0; inputText[i] != '\0'; ++i) {                // for loop that runs unless item of array is null
+            x = inputText[i];                                   //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
             
-            if(x >= 'a' && x <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
-                x = x - 32;
-                //x = x + key; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
-
-
+            if(x >= 'a' && x <= 'z') {                          // if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
+                x = x - 32;                                     // value of x is replaced with value of x - 31 (replaces all letters with their uppercase couplet)
             } 
-            if (x >= 'A' && x <= 'Z') {
-            x = x + key;
+            
+            if (x >= 'A' && x <= 'Z') {                         // if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'A' and less than ascii value of 'Z' then runs next line
+            x = x + key;                                        // value of x is replaced with value of x plus key value, (the character is rotated by the amount the key specifies)
 
-            if (x > 'Z')
-              x = x - 'Z' + 'A' - 1;
+                if (x > 'Z')                                    // when the key rotates a letter past Z it starts back at A and contines so that special char's are not mixed in.
+                    x = x - 'Z' + 'A' - 1;
           }
 
-          inputText[i] = x; // recompiles 'inputText[]' with individual chars
-                            // from for loop which has encrypted them 
+          inputText[i] = x;                                     // recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
 
      }
 
-    printf("Encrypted message:\n %s\n", inputText); //prints "Encrypted message: ************" then creates new line.
+    printf("Encrypted message:\n %s\n", inputText);             //prints "Encrypted message: ************" then creates new line.
 }
 
 
-//decryption
+// rotationDecryption function takes a string (cipherText) and integer (key) and for every character in the string if it is between a and z ascii values the value of that char
+// is minused by 32 to give the capital of that letter then the key is minused from the char if it is within the ascii value of A and Z. The characters are reassembled into a
+// string and the string is printed.
 
 void rotationDecryption(char *cipherText, int key) {
     
     
-    char x1; //temp store of individual characters
-    int i = 0; // counter integer
+    char x1;                                                    // temporary store of individual characters
+    int i = 0;                                                  // counter integer
 
     
     
-        for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                       //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
-            x1 = cipherText[i];                                                         //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
+    for (i = 0; cipherText[i] != '\0'; ++i) {                   // for loop runs unless item of array is null 
+        x1 = cipherText[i];                                     // stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
 
-            if(x1 >= 'a' && x1 <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
-                x1 = x1 - 32; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
-
-                
-              
+        if(x1 >= 'a' && x1 <= 'z') {                            //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
+            x1 = x1 - 32;                                       // value of x is replaced with x - 32 (all characters between a to z are replaced with their couplet in uppercase)  
             }
-            if(x1 >= 'A' && x1 <= 'Z') { 
-                x1 = x1 - key;
+            
+//---------------------------------------------------------------------------------------------------------------------------------
+            
+        if(x1 >= 'A' && x1 <= 'Z') { 
+            x1 = x1 - key;
 
-                if (x1 < 'A')
-                    x1 = x1 +'Z' - 'A' + 1;
+            if (x1 < 'A')
+                x1 = x1 +'Z' - 'A' + 1;
             }
             
         cipherText[i] = x1; //recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
-        
         }
 
-    printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
+printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
 }
+
+//
 
 void rotationBruteForceAttack(char *cipherText) {
     
