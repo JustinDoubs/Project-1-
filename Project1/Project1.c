@@ -6,7 +6,7 @@ void rotationDecryption(char *inputText, int key);
 void rotationEncryption(char *cipherText, int key);
 void rotationBruteForceAttack(char *cipherText);
 void newrotationBruteForceAttack(char *cipherText, int key);
-void SubstitiutionEncryption(char *cipherText, char *subKey);
+void substitutionDecryption(char *cipherText, char *subKey);
 void substitutionEncryption(char *cipherText, char *subKey);
 void arraycopy(char *array, char *arrayCopy);
 int sizeOfArray(char *cipherText);
@@ -83,6 +83,14 @@ int main() {
             // case 4 is decryption of text using substitution cipher, encrypted text and key are given 
                 
             case 4 :
+                
+                printf("Enter text to be encrypted: NOTE to end entry press Tab, followed by enter\n");               // prints message asking for text input to be encrypted and specifies how it should be done.
+                scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
+    
+                printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
+                scanf(" %[^\t]s", subKey);                                                                            // reads string of a new alphabet and stores it in subKey input needs to be 26 characters and with no repetition
+                
+                substitutionDecryption(cipherText, subKey); 
             
                 break;
                 
@@ -135,6 +143,7 @@ void rotationEncryption(char *inputText, int key) {             // function does
                 if (x > 'Z')                                    // when the key rotates a letter past Z it starts back at A and contines so that special char's are not mixed in.
                     x = x - 'Z' + 'A' - 1;
           }
+          
 
           inputText[i] = x;                                     // recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
 
@@ -259,54 +268,33 @@ void newrotationBruteForceAttack(char *cipherText, int key) {
         // || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') || (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')
 }
 
-void SubstitiutionEncryption(char *cipherText, char *subKey) {
+void substitutionDecryption(char *cipherText, char *subKey) {
     
-    char x1, x2, x3, x4;
-    char alphabet[26] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-    // sub jey is is equl to something... ......
+    int x1;
     int i;
-   
-    if (strlen(alphabet) != strlen(subKey)) {
-        printf("Please correct key");
-        printf("%lu, %lu", strlen(alphabet), strlen(subKey));
+    int k;
+    //printf("%s\n%s", cipherText, subKey);
+    for (i = 0; cipherText[i] != '\0'; i++) {
+        x1 = cipherText[i];
+        
+        for(k = 0; (subKey[k] = '\0'); k++) {
+            if (subKey[k] == x1)
+                break;
         }
         
+        if (x1 >= 'a' && x1 <= 'z') {
+            x1 = x1 - 32;
+        }   
 
-    else for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                      
-            x1 = cipherText[i];
-            
-            //the cipherText[1] = h
-            //    cipherText[2] = e
-            //    cipherText[3] = l
-        const char* ptr = strchr(alphabet, tolower(cipherText[i]));
-	    int oldCharIndex = ptr - alphabet;
-        printf("%d  ,  %s\n",oldCharIndex, ptr);
-       /* if (ptr && oldCharIndex >= 0) {
-            if (cipherText[i] = isupper(cipherText[i])) {
-            toupper(subKey[oldCharIndex])
-            }
-            
-            else subKey[oldCharIndex];
-        }*/
-    cipherText[i] = x1;   
+        if (x1 >= 'A' && x1 <= 'Z') {
+            x1 = subKey[k + 65];
+        }
+
+        
+    cipherText[i] = x1;
+       
     }
 
-                        
-            
-            /*
-            if (x1 >= 'a' && x1 <= 'z') {
-                x1 = x1 - 32;   
-            }
-            
-            
-                                                                                    // therefore all values from copher text will be beteween 65 and 90 or we dont want to change them.
-            if (x1 >= 'A' && x1 <= 'Z') {
-
-            }
-            */
-
-    
-    
 printf("encrypted message: %s\n", cipherText);
 }
 
@@ -323,7 +311,7 @@ void substitutionEncryption(char *cipherText, char *subKey) {
         }   
 
         if (x1 >= 'A' && x1 <= 'Z') {
-            x1 = subKey[x1 - 64];
+            x1 = subKey[x1 - 65];
         }
     cipherText[i] = x1;
        
