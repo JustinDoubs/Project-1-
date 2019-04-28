@@ -277,19 +277,19 @@ void substitutionDecryption(char *cipherText, char *subKey) {
     for (i = 0; cipherText[i] != '\0'; i++) {
         x1 = cipherText[i];
         
-        for(k = 0; (subKey[k] = '\0'); k++) {
-            if (subKey[k] == x1)
-                break;
-        }
         
         if (x1 >= 'a' && x1 <= 'z') {
             x1 = x1 - 32;
         }   
-
-        if (x1 >= 'A' && x1 <= 'Z') {
-            x1 = subKey[k + 65];
+        
+        for(k = 0; (subKey[k] != '\0'); k++) {
+            if (subKey[k] == x1)
+                break;
         }
 
+        if (x1 >= 'A' && x1 <= 'Z') {
+            x1 = k + 65;
+        }
         
     cipherText[i] = x1;
        
