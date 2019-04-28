@@ -10,6 +10,7 @@ void substitutionDecryption(char *cipherText, char *subKey);
 void substitutionEncryption(char *cipherText, char *subKey);
 void arraycopy(char *array, char *arrayCopy);
 int sizeOfArray(char *cipherText);
+int foundInDictionary(char *word);
 
 
 int main() {
@@ -113,6 +114,9 @@ int main() {
             case 6 :
               // 6. Decryption of a message encrypted with a substitution cipher
               // given cipher text only
+              scanf("%s", cipherText);
+              if (foundInDictionary(cipherText) == 1)
+              printf("%s is a word", cipherText); 
               break;
               
             // if 1,2,3,4,5 or 6 are not selected then defult is selected.
@@ -205,42 +209,7 @@ int sizeOfArray(char *cipherText) {
 }
 
 void newrotationBruteForceAttack(char *cipherText, int key) {
-    /*
-    char x1;
-    int i = 0;//temp store of individual characters
-    
-    
-    
-        for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                      
-            x1 = cipherText[i];
-
-            if (x1 >= 'a' && x1 <= 'z') {
-                x1 = x1 - 32;
-                
-                
-            }
-
-            if (x1 >= 'A' && x1 <= 'Z') {
-                x1 = x1 - key;
-
-                if (x1 < 'A') {
-                  x1 = x1 + 'Z' - 'A' + 1;
-                }
-            
-            }
-        cipherText[i] = x1;
-        }
-        */
-       
-       rotationDecryption(cipherText, key);
-       
-        //if ((cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L')) {
-           // printf("Decrypted message: %s\n", cipherText);
-
-          // || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') ||
-          // (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i +
-          // 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')
-        //}
+    rotationDecryption(cipherText, key);   
 }
 
 void substitutionDecryption(char *cipherText, char *subKey) {
@@ -294,3 +263,29 @@ void substitutionEncryption(char *cipherText, char *subKey) {
 printf("Encrypted message:\n %s\n", cipherText);
 }
 
+int foundInDictionary(char *word) {
+    FILE *words;
+    words = fopen("Words.txt", "r");
+    
+    int i;
+    char temp[32];
+    int matchResult = 0;
+    
+
+    for (i = 1; word != NULL; i++) {
+        
+        if (word[i] >= 'A' && word[i] <= 'Z') {
+            word[i] = word[i] + 32;
+        }
+    }
+    
+    while (fscanf(words, "%s", temp)) {
+        if (strstr(temp, word) != NULL) {
+            matchResult = 1;
+            break;
+        }
+    }
+        
+fclose(words);
+return matchResult;
+}
