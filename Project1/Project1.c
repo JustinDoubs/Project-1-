@@ -64,7 +64,9 @@ int main() {
                 scanf(" %d", &key);                                                                                   // reads integer from user and stores it in the key variable.
                     
                 rotationDecryption(cipherText, key);                                                                  // calls rotationDecryption function which takes cipher text which is a string and key which is an integer
-
+                
+                printf("Decrypted message: %s\n", cipherText);                                                        //prints "decrypted message: ************" then creates new line.
+                
                 break;
  
             // Case 3 is encryption of text using substitution cipher, text and key are inputed by user.
@@ -100,9 +102,11 @@ int main() {
                 printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");                // asks for encrypted text to be entered for decryption and how it is to be done
                 scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
                
-                for (int key = 1; key < 27; key++) {                                                                  // for 26 iterations i is incremented 
+                for (int key = 0; key < 26; key++) {                                                                  // for 26 iterations i is incremented 
                     arraycopy(cipherText, arrayCopy);                                                                 // calls arraycopy with cipher text and arrayCopy (function copies cipher text to arrayCopy)
-                    newrotationBruteForceAttack(arrayCopy, key);                                                      // calls newrotationBruteForceAttack function whic takes arrayCopy and key 
+                    rotationDecryption(arrayCopy, key);                                                               // calls newrotationBruteForceAttack function whic takes arrayCopy and key 
+                    
+                    printf("Decrypted Message:%s\n", arrayCopy);
                 }
              
               break;
@@ -181,46 +185,10 @@ void rotationDecryption(char *cipherText, int key) {
                 x1 = x1 +'Z' - 'A' + 1;
             }
             
-        cipherText[i] = x1; //recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
+        cipherText[i] = x1; //recompiles 'inputText[]' with individual chars from for loop which has encrypted them 55%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% cJARRGOONNNNN
         }
-
-printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
+//printf("Decrypted message: %s\n", cipherText); //prints "decrypted message: ************" then creates new line.
 }
-
-//
-
-void rotationBruteForceAttack(char *cipherText) {
-    
-    char x1; //temp store of individual characters
-    int i = 0; // counter integer
-    int key = 0;
-    
-    for (key = 0; key < 27; ++key) {
-        for (i = 0; cipherText[i] != '\0'; ++i) {                                                                                       //for loop that runs unless item of array is null not sure when this would be used this as it was used by others and well it works.
-            x1 = cipherText[i];                                                         //stores each individual character of 'inputText[]' in char variable 'x' for one rendition of the loop
-
-            if(x1 >= 'a' && x1 <= 'z') { //if the ascii value of a char from 'inputText' being stored in 'x' is greater than ascii value of 'a' and less than ascii value of 'z' then runs next line
-                x1 = x1 - 32; // reassigns value of x as previous value of x + key value ||||| will change to x = x - 32; to change all lower case letters to uppercase 
-
-
-
-            }
-            if(x1 >= 'A' && x1 <= 'Z') { 
-                x1 = x1 - key;
-
-                if (x1 < 'A')
-                    x1 = x1 +'Z' - 'A' + 1;
-            }
-            
-            cipherText[i] = x1; //recompiles 'inputText[]' with individual chars from for loop which has encrypted them 
-        
-        }
-        //if (cipherText[1] == 'T')
-        printf("Decrypted message: %s\n", cipherText);
-    }
-
-}
-
 
 
 void arraycopy(char *cipherText, char *arrayCopy) {
@@ -237,7 +205,7 @@ int sizeOfArray(char *cipherText) {
 }
 
 void newrotationBruteForceAttack(char *cipherText, int key) {
-    
+    /*
     char x1;
     int i = 0;//temp store of individual characters
     
@@ -262,10 +230,17 @@ void newrotationBruteForceAttack(char *cipherText, int key) {
             }
         cipherText[i] = x1;
         }
-        if ((cipherText[i] == 84 && cipherText[i + 1] == 72 && cipherText[i + 2] == 69)){
-            printf("Decrypted message: %s\n", cipherText);
-        }
-        // || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') || (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')
+        */
+       
+       rotationDecryption(cipherText, key);
+       
+        //if ((cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i + 2] == 'L')) {
+           // printf("Decrypted message: %s\n", cipherText);
+
+          // || (cipherText[i] == 'I' && cipherText[i + 1] == 'T') ||
+          // (cipherText[i] == 'H' && cipherText[i + 1] == 'E' && cipherText[i +
+          // 2] == 'L' && cipherText[i+3] == 'L' && cipherText[i+4] == 'O')
+        //}
 }
 
 void substitutionDecryption(char *cipherText, char *subKey) {
