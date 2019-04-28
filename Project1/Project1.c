@@ -7,6 +7,7 @@ void rotationEncryption(char *cipherText, int key);
 void rotationBruteForceAttack(char *cipherText);
 void newrotationBruteForceAttack(char *cipherText, int key);
 void SubstitiutionEncryption(char *cipherText, char *subKey);
+void substitutionEncryption(char *cipherText, char *subKey);
 void arraycopy(char *array, char *arrayCopy);
 int sizeOfArray(char *cipherText);
 
@@ -75,7 +76,7 @@ int main() {
                 printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
                 scanf(" %[^\t]s", subKey);                                                                            // reads string of a new alphabet and stores it in subKey input needs to be 26 characters and with no repetition
                 
-                SubstitiutionEncryption(cipherText, subKey);                                                          // call SubstitutionEncryption function which takes cipherText and subKey (both strings)
+                substitutionEncryption(cipherText, subKey);                                                          // call SubstitutionEncryption function which takes cipherText and subKey (both strings)
                 
                 break;
                 
@@ -248,8 +249,9 @@ void newrotationBruteForceAttack(char *cipherText, int key) {
                 if (x1 < 'A') {
                   x1 = x1 + 'Z' - 'A' + 1;
                 }
-            cipherText[i] = x1;
+            
             }
+        cipherText[i] = x1;
         }
         if ((cipherText[i] == 84 && cipherText[i + 1] == 72 && cipherText[i + 2] == 69)){
             printf("Decrypted message: %s\n", cipherText);
@@ -306,5 +308,26 @@ void SubstitiutionEncryption(char *cipherText, char *subKey) {
     
     
 printf("encrypted message: %s\n", cipherText);
+}
+
+void substitutionEncryption(char *cipherText, char *subKey) {
+    
+    int x1;
+    int i; 
+    
+    for (i = 0; cipherText[i] != '\0'; ++i) {
+        x1 = cipherText[i];
+        
+        if (x1 >= 'a' && x1 <= 'z') {
+            x1 = x1 - 32;
+        }   
+
+        if (x1 >= 'A' && x1 <= 'Z') {
+            x1 = subKey[x1 - 64];
+        }
+    cipherText[i] = x1;
+       
+    }
+printf("Encrypted message:\n %s\n", cipherText);
 }
 
