@@ -35,7 +35,7 @@ int main() {
         char subKey[26];                        // string to store users input of the Key for subsititution encryption and decryption.
         int key = 1;                            // initialization of the key used in rotation encryption and decryption.
         int k = sizeOfArray(cipherText);        // initialises k as the value of the size of the string cipher text ( inputed by the user)       // maybe should have + 1
-        char arrayCopy[k];                      // string used for storing a duplicate of the cipherText string for manipulations in the rotation brute force attack which has the size of cipher text.
+        char arrayCopy[k+1];                    // string used for storing a duplicate of the cipherText string for manipulations in the rotation brute force attack which has the size of cipher text.
 
 
         scanf("%d",&choice);                    // takes input from user, overwriting the value of choice and therefore selecting the option from the menu.
@@ -102,7 +102,7 @@ int main() {
             // case 5 is brute force decryption of rotation cipher given encrypted text.
 
             case 5 :
-                printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");                // asks for encrypted text to be entered for decryption and how it is to be done
+                printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter, Note also if decryption is unsuccessful please shorten message\n");                // asks for encrypted text to be entered for decryption and how it is to be done
                 scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
 
 
@@ -110,25 +110,25 @@ int main() {
                     arraycopy(cipherText, arrayCopy);                                                                 // calls arraycopy with cipher text and arrayCopy (function copies cipher text to arrayCopy)
                     rotationDecryption(arrayCopy, key);                                                               // calls rotationDecryption function which takes arrayCopy and key see rotationDecryption defnition for more info
 
-                    char firstWord[148];
-                    int i;
+                    char firstWord[148];                                                                              // array firstWord has size 148
+                    //char secondWord[148];
+                    int i;                                                                                            // counter integer i is declared
 
 
-                    while ( p < 10 )  {
-                        for (i = 0; arrayCopy[i] != 32; i++) {
-                            firstWord[i] = arrayCopy[i];    
-                        }
-                        //printf("%s \n",firstWord);
-                            firstWord[i] = '\0';
-                        
-                            if (found(firstWord) == 1) {
-                                printf("Decrypted Message: %s\n", arrayCopy);
-                            }
-    
-                        }
-                    }
                     
-                 
+                    for (i = 0; arrayCopy[i] != 32; i++) {                                                            // for loop that increments i, ad run till arrayCopy at i is a space
+                        firstWord[i] = arrayCopy[i];                                                                  // the value of firstWord at i becomes the value of arrayCopy at i 
+                                        
+                    }
+                    //printf("1. %s \n",firstWord);                  
+                    
+                    firstWord[i] = '\0';                                                                              // firstWord at i is equal to a null character 
+                    
+                    if (found(firstWord) == 1 ) {                                                                     // if statement that runs next line if the found function returns 1
+                        printf("Decrypted Message: %s\n", arrayCopy);                                                 // prints decrypted message
+                    }
+
+                }
 
                 break;
 
@@ -286,69 +286,37 @@ void substitutionEncryption(char *cipherText, char *subKey) {
 printf("Encrypted message:\n %s\n", cipherText);                    // prints the encrypted message (cipherText)
 }
 
-// foundInDictionary ISNNTTTT WORRKKINNGGG
+// found function opens a file that contains 20000 most used words and takes a word and chages that word to lowercase as all the words in the file are lower case 
+// and compares that to each word in the file to see if it is actually a word if it is the functoin returns 1
 
-int foundInDictionary(char* word) {
-    
-    FILE* Words;
-    Words = fopen("Words.txt", "r");
+int found(char* word) {                                             // takes array 
+    FILE* everyWord;                                                // declares everyWord as a file
+    everyWord = fopen("Words.txt", "r");                            // initalises everyWord as Words.txt and opens Words.txt for reading
 
-    int i;
-    char temp[1024];
-    int matchResult = 0;
-    if ( Words != NULL ) {
-
-        for (i = 0; word[i] != '\0'; i++) {
-
-            if (word[i] >= 'A' && word[i] <= 'Z') {
-               word[i] = word[i] + 32;
-            }
-        }
-
-
-        while (fscanf(Words, "%s", temp) != '\0') {
-            if (strstr(temp, word) != NULL) {
-                matchResult = 1;
-                break;
-            }
-        }
-    }
-    fclose(Words);
-    return matchResult;
-
-}
-
-int found(char* word) {
-    FILE* everyWord;
-    everyWord = fopen("Words.txt", "r");
-    
-    int i = 0;
-    char temp[32];
-    int matchResult = 0;
-    if (everyWord != NULL) {
+    int i = 0;                                                      // initialisation and declaration of 'i'
+    char temp[32];                                                  // declaration of array with size of 32 called temp for storing words from the file 
+    int matchResult = 0;                                            // initialisation and declaration of match result
+    if (everyWord != NULL) {                                        // if statement which only runs if the file exist or is not equal to null
         
-        for (i = 0;word[i] != '\0'; i++) {
-            if (word[i] >= 'A' && word[i] <= 'Z') {
-               word[i] = word[i] + 32;
+        for (i = 0;word[i] != '\0'; i++) {                          // for loop that increments 'i' and runs through word till it is equal to null
+            if (word[i] >= 'A' && word[i] <= 'Z') {                 // if word at 'i' is between A and Z then next line runs 
+               word[i] = word[i] + 32;                              // word at i is equal to word at i + 32 (changes each letter to lowercase)
             }
 
         }
         
         //while (fscanf(everyWord, "%[\32]s", temp)) {
-        while (fgets(temp, 32, everyWord)){
+        while (fgets(temp, 32, everyWord)){                         // while loop that take each word from file and stores it in temp line by line
             //printf("hi %s",temp);
-            if (strstr(temp, word) != NULL) {
-                matchResult = 1;
-                break;
+            if (strstr(temp, word) != NULL) {                       // if statement that runs next line if the array word is found in the array temp
+                matchResult = 1;                                    // changes the value of match result to 1
+                break;                                              // breaks out of while statement
             }
-            else 
             
-            //printf("failed to find word");
-            i++;
         }
 
         //printf("%s\n",word);
-        return matchResult;
+        return matchResult;                                         // returns matchResult
     }
     else 
     return 0;
