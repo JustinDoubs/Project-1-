@@ -60,7 +60,7 @@ int main() {
 
             case 2:
 
-                printf("Enter text to be dDecrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
+                printf("Enter text to be decrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
                 scanf("%[^\t]s", cipherText);                                                                         // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
 
                 printf("enter key:\n");                                                                               // prints 'enter key:' then starts new line
@@ -81,6 +81,7 @@ int main() {
                 printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
                 scanf(" %[^\t]s", subKey);                                                                            // reads string of a new alphabet and stores it in subKey input needs to be 26 characters and with no repetition
 
+    
                 substitutionEncryption(cipherText, subKey);                                                          // call SubstitutionEncryption function which takes cipherText and subKey (both strings)
 
                 break;
@@ -94,7 +95,8 @@ int main() {
 
                 printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
                 scanf(" %[^\t]s", subKey);                                                                            // reads string of a new alphabet and stores it in subKey input needs to be 26 characters and with no repetition
-
+    
+                
                 substitutionDecryption(cipherText, subKey);
 
                 break;
@@ -111,8 +113,8 @@ int main() {
                     rotationDecryption(arrayCopy, key);                                                               // calls rotationDecryption function which takes arrayCopy and key see rotationDecryption defnition for more info
 
                     char firstWord[148];                                                                              // array firstWord has size 148
-                    //char secondWord[148];
-                    int i;                                                                                            // counter integer i is declared
+                    char secondWord[148];
+                    int i = 0, p =0;                                                                                            // counter integer i is declared
 
 
                     
@@ -120,11 +122,23 @@ int main() {
                         firstWord[i] = arrayCopy[i];                                                                  // the value of firstWord at i becomes the value of arrayCopy at i 
                                         
                     }
+                    
+                    /*
+                    for (p = 0; arrayCopy[p] != '\0'; p++) {}                                                         // for loop that increments i, ad run till arrayCopy at i is a space                                                         
+                    for (p; arrayCopy[p] != 32; p++) {                                                               // for loop that increments i, ad run till arrayCopy at i is a space
+                        firstWord[p] = arrayCopy[p];                                                                  // the value of firstWord at i becomes the value of arrayCopy at i 
+                                        
+                    }
+                    
+                    
+                    
                     //printf("1. %s \n",firstWord);                  
-                    
+                    //printf("2. %s \n",secondWord);   
+                    */
                     firstWord[i] = '\0';                                                                              // firstWord at i is equal to a null character 
+                    //secondWord[p] = '\0';                                                                             // secondWord at p is equal to a null character 
                     
-                    if (found(firstWord) == 1 ) {                                                                     // if statement that runs next line if the found function returns 1
+                    if ((found(firstWord) == 1 )/* && (found(secondWord) == 1)*/) {                                                                     // if statement that runs next line if the found function returns 1
                         printf("Decrypted Message: %s\n", arrayCopy);                                                 // prints decrypted message
                     }
 
@@ -304,6 +318,7 @@ int found(char* word) {                                             // takes arr
             }
 
         }
+        
         
         //while (fscanf(everyWord, "%[\32]s", temp)) {
         while (fgets(temp, 32, everyWord)){                         // while loop that take each word from file and stores it in temp line by line
