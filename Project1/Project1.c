@@ -10,6 +10,7 @@ void substitutionEncryption(char *cipherText, char *subKey);
 void arraycopy(char *array, char *arrayCopy);
 int sizeOfArray(char *cipherText);
 int foundInDictionary(char* word);
+int found(char* word);
 
 
 int main() {
@@ -28,9 +29,9 @@ int main() {
                 "press any other number to exit program\n");
 
 
-        char cipherText[1000];                  // creating string to store the users text in to be encrypted or decrypted
+        char cipherText[100000];                  // creating string to store the users text in to be encrypted or decrypted
         char text[] = {"THE AND DO HELLO "};
-        char text2[] = {"HELLO"};
+        char text2[] = {"CLIck"};
         char subKey[26];                        // string to store users input of the Key for subsititution encryption and decryption.
         int key = 1;                            // initialization of the key used in rotation encryption and decryption.
         int k = sizeOfArray(cipherText);        // initialises k as the value of the size of the string cipher text ( inputed by the user)       // maybe should have + 1
@@ -59,7 +60,7 @@ int main() {
 
             case 2:
 
-                printf("Enter text to be encrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
+                printf("Enter text to be dDecrypted: NOTE to end entry press Tab followed by Enter\n");                // prints messsage asking for text input and specifies how it should be done.
                 scanf("%[^\t]s", cipherText);                                                                         // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
 
                 printf("enter key:\n");                                                                               // prints 'enter key:' then starts new line
@@ -88,7 +89,7 @@ int main() {
 
             case 4 :
 
-                printf("Enter text to be encrypted: NOTE to end entry press Tab, followed by enter\n");               // prints message asking for text input to be encrypted and specifies how it should be done.
+                printf("Enter text to be decrypted: NOTE to end entry press Tab, followed by enter\n");               // prints message asking for text input to be encrypted and specifies how it should be done.
                 scanf(" %[^\t]s", cipherText);                                                                        // scans text and stores it in cipherText array, text is stopped being read by exit specifier 'tab' then 'enter' keys.
 
                 printf("enter alphabet subsitution: NOTE Key must be 26 characters with no repetition,to end entry press Tab followed by enter\n"); // prints 'enter alphabet subsitution:' then starts new line
@@ -109,30 +110,30 @@ int main() {
                     arraycopy(cipherText, arrayCopy);                                                                 // calls arraycopy with cipher text and arrayCopy (function copies cipher text to arrayCopy)
                     rotationDecryption(arrayCopy, key);                                                               // calls rotationDecryption function which takes arrayCopy and key see rotationDecryption defnition for more info
 
-                    char firstWord[60];
+                    char firstWord[148];
                     int i;
 
 
-                    for (i = 0; arrayCopy[i] == 32; i++) {
-                        firstWord[i] = arrayCopy[i];
+                    while ( p < 10 )  {
+                        for (i = 0; arrayCopy[i] != 32; i++) {
+                            firstWord[i] = arrayCopy[i];    
+                        }
+                        //printf("%s \n",firstWord);
+                            firstWord[i] = '\0';
+                        
+                            if (found(firstWord) == 1) {
+                                printf("Decrypted Message: %s\n", arrayCopy);
+                            }
+    
+                        }
                     }
-                       printf("helllooooooo %s\n", firstWord);
-                    firstWord[i] = '\0';
-                        printf("byeeee %s\n", firstWord);
-                    //if (strstr(text, firstWord))
-                    //if (foundInDictionary(firstWord) == 1) {
-                        printf("Decrypted Message:%s\n", arrayCopy);
-                    //}
+                    
+                 
 
-                }
-
-              break;
+                break;
 
             case 6 :
-
-                if (foundInDictionary(text))
-                printf("is a word");
-              break;
+                break;
 
             // if 1,2,3,4,5 or 6 are not selected then defult is selected.
 
@@ -285,33 +286,71 @@ void substitutionEncryption(char *cipherText, char *subKey) {
 printf("Encrypted message:\n %s\n", cipherText);                    // prints the encrypted message (cipherText)
 }
 
-int foundInDictionary(char* word) {
+// foundInDictionary ISNNTTTT WORRKKINNGGG
 
-    FILE* words;
-    words = fopen("Words.txt", "r");
+int foundInDictionary(char* word) {
+    
+    FILE* Words;
+    Words = fopen("Words.txt", "r");
 
     int i;
-    char temp[64];
+    char temp[1024];
     int matchResult = 0;
-    if ( words != NULL ) {
+    if ( Words != NULL ) {
 
-    for (i = 0; word != NULL; i++) {
+        for (i = 0; word[i] != '\0'; i++) {
 
-        if (word[i] >= 'A' && word[i] <= 'Z') {
-            word[i] = word[i] + 32;
+            if (word[i] >= 'A' && word[i] <= 'Z') {
+               word[i] = word[i] + 32;
+            }
         }
-    }
 
 
-        while (fscanf(words, "%s", temp)) {
-            if (strstr(temp, word) != 0) {
+        while (fscanf(Words, "%s", temp) != '\0') {
+            if (strstr(temp, word) != NULL) {
                 matchResult = 1;
                 break;
             }
         }
     }
-    fclose(words);
+    fclose(Words);
     return matchResult;
 
+}
+
+int found(char* word) {
+    FILE* everyWord;
+    everyWord = fopen("Words.txt", "r");
+    
+    int i = 0;
+    char temp[32];
+    int matchResult = 0;
+    if (everyWord != NULL) {
+        
+        for (i = 0;word[i] != '\0'; i++) {
+            if (word[i] >= 'A' && word[i] <= 'Z') {
+               word[i] = word[i] + 32;
+            }
+
+        }
+        
+        //while (fscanf(everyWord, "%[\32]s", temp)) {
+        while (fgets(temp, 32, everyWord)){
+            //printf("hi %s",temp);
+            if (strstr(temp, word) != NULL) {
+                matchResult = 1;
+                break;
+            }
+            else 
+            
+            //printf("failed to find word");
+            i++;
+        }
+
+        //printf("%s\n",word);
+        return matchResult;
+    }
+    else 
+    return 0;
 }
 
